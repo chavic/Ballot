@@ -1,4 +1,4 @@
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [workspace]
-members = ["api", "cli", "ballot", "verifier", "circle", "store", "p2p"]
+members = ["api", "cli", "ballot", "circle", "store", "p2p"]
