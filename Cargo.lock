@@ -474,7 +474,6 @@ name = "ballot"
 version = "0.1.0"
 dependencies = [
  "clap",
- "config",
  "env_logger",
  "log",
  "store",
@@ -790,7 +789,6 @@ dependencies = [
 name = "circle"
 version = "0.1.0"
 dependencies = [
- "config",
  "env_logger",
  "log",
 ]
@@ -803,11 +801,26 @@ checksum = "d646c7ade5eb07c4aa20e907a922750df0c448892513714fd3e4acbc7130829f"
 dependencies = [
  "atty",
  "bitflags",
+ "clap_derive",
  "clap_lex",
  "indexmap",
+ "once_cell",
  "strsim",
  "termcolor",
  "textwrap",
+]
+
+[[package]]
+name = "clap_derive"
+version = "3.2.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "759bf187376e1afa7b85b959e6a664a3e7a95203415dba952ad19139e798f902"
+dependencies = [
+ "heck 0.4.0",
+ "proc-macro-error",
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
@@ -823,7 +836,10 @@ dependencies = [
 name = "cli"
 version = "0.1.0"
 dependencies = [
+ "chrono",
  "clap",
+ "libp2p",
+ "url",
 ]
 
 [[package]]
@@ -3683,6 +3699,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "shared"
+version = "0.1.0"
+dependencies = [
+ "config",
+ "env_logger",
+ "log",
+]
+
+[[package]]
 name = "signal-hook"
 version = "0.3.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3784,8 +3809,6 @@ checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 name = "store"
 version = "0.1.0"
 dependencies = [
- "chrono",
- "config",
  "env_logger",
  "evmap",
  "futures",
