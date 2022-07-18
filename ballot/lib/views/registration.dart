@@ -23,7 +23,7 @@ class _RegistrationState extends State<Registration> {
           fit: BoxFit.cover,
           height: 60,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(255, 238, 108, 108),
       ),
       body: Form(
         key: _formKey,
