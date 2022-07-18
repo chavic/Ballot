@@ -1,10 +1,10 @@
 use crate::vote::Vote;
 
 use super::verified_voter::{VerifiedVoter, VoterIdentifier};
-use store::{Store, StoreConfig, StoreError};
+use store::{ImutableStore, StoreConfig, StoreError};
 
 pub struct VerificationStore {
-    pub store: Store,
+    pub store: ImutableStore,
 }
 
 impl VerificationStore {

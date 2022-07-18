@@ -1,4 +1,4 @@
-use store::{Store, StoreConfig};
+use store::{ImutableStore, StoreConfig};
 
 pub trait OptionsIdentifier {}
 
@@ -8,7 +8,7 @@ pub struct Option<I: OptionsIdentifier> {
 
 pub struct OptionStore<I: OptionsIdentifier> {
     option: Option<I>,
-    store: Store,
+    store: ImutableStore,
 }
 
 impl OptionStore<String> {
