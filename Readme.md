@@ -13,8 +13,11 @@ Electronic Voting helps to Address SDG 16, which aims to achieve Peace, Justice,
 The codebase consists of two folders Ballot/ contains the main system written in Rust, while the other folder ballot/ contains a frontend app written in dart.
 
 Languages/Frameworks: Rust, Flutter/Dart
+
 Blockchain protocol used: Built Custom
+
 Instructions on how to run the code: TODO
+
 Link of video demo: TODO
 
 # The Design of Ballot
