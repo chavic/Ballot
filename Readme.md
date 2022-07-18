@@ -1,5 +1,6 @@
 # Ballot Team
-Number of team members(if any): 3
+Number of team members: 3
+
 Name of team members : 
 - Victor Chabunda (chavic)
 - Silas Magu
