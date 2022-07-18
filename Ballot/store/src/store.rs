@@ -1,22 +1,24 @@
+use std::fs::File;
+
 use crate::{
-    block::{BlockData, BlockHash, Datable},
+    block::{Datable, Hashable},
     chain::Chain,
     config::StoreConfig,
     metadata::SearchMetadata,
     StoreError,
 };
 
-pub struct Store {
+pub struct ImutableStore {
     pub config: StoreConfig,
-    pub chain: Chain<String, BlockHash, BlockData<String>>,
+    pub chain: Chain<String, File>,
 }
 
 pub struct LinkedStore {
     pub config: StoreConfig,
-    pub chain: Chain<String, BlockHash, BlockData<String>>,
+    pub chain: Chain<String, File>,
 }
 
-impl Store {
+impl ImutableStore {
     pub fn new(config: &StoreConfig) -> Self {
         todo!("Impliment new store")
     }
