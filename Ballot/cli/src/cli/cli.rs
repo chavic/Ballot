@@ -10,13 +10,13 @@ use url::Url;
 pub struct Cli {
     /// Sets a custom config file
     #[clap(short, long, value_parser, value_name = "FILE")]
-    config: Option<PathBuf>,
+    pub config: Option<PathBuf>,
     /// Turn debugging information on
     #[clap(short, long, action = clap::ArgAction::Count)]
-    debug: u8,
+    pub debug: u8,
     /// Subcommands to access specific components
     #[clap(subcommand)]
-    command: Option<Commands>,
+    pub command: Option<Commands>,
 }
 
 #[derive(Subcommand)]
