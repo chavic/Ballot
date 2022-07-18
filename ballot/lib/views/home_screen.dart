@@ -1,5 +1,5 @@
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:ballot/models/model_data.dart';
+import 'package:ballot/views/registration.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,7 +12,17 @@ class HomeScreen extends StatefulWidget {
 class MyHomePageState extends State<HomeScreen> {
   final controller = TextEditingController();
 
-  List<Candidate> candidate = candidates;
+  List<Election> elections = allElections;
+
+  void searchCandidate(String query) {
+    final results = allElections.where((candidate) {
+      final candidateName = candidate.name.toLowerCase();
+      final input = query.toLowerCase();
+
+      return candidateName.contains(input);
+    }).toList();
+    setState(() => elections = results);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +32,14 @@ class MyHomePageState extends State<HomeScreen> {
         title: Image.asset(
           "assets/ballot_t.png",
           fit: BoxFit.cover,
-          height: 50,
+          height: 60,
         ),
         backgroundColor: Colors.white,
       ),
       body: Column(
         children: <Widget>[
           Container(
-            margin: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+            margin: const EdgeInsets.fromLTRB(14, 14, 14, 14),
             child: TextField(
               controller: controller,
               decoration: InputDecoration(
@@ -45,17 +55,23 @@ class MyHomePageState extends State<HomeScreen> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: candidate.length,
+              itemCount: elections.length,
               itemBuilder: (context, index) {
-                final candidate = candidates[index];
+                final election = elections[index];
                 return ListTile(
                   leading: Image.network(
-                    candidate.urlImage,
+                    election.urlImage,
                     fit: BoxFit.cover,
                     width: 50,
                     height: 50,
                   ),
-                  title: Text(candidate.name),
+                  title: Text(election.name),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: ((context) => Registration(election: election)),
+                    ),
+                  ),
                 );
               },
             ),
@@ -64,68 +80,4 @@ class MyHomePageState extends State<HomeScreen> {
       ),
     );
   }
-
-  void searchCandidate(String query) {
-    final results = candidate.where((candidate) {
-      final candidateName = candidate.name.toLowerCase();
-      final input = query.toLowerCase();
-
-      return candidateName.contains(input);
-    }).toList();
-    setState(() => candidate = results);
-  }
 }
-
-
-
-// Scaffold(
-//       appBar: AppBar(
-//         centerTitle: true,
-//         title: Image.asset(
-//           "assets/ballot_t.png",
-//           fit: BoxFit.cover,
-//           height: 50,
-//         ),
-//         backgroundColor: Colors.white,
-//       ),
-//       body: Container(
-//         color: Color.fromARGB(255, 231, 231, 231),
-//         width: double.infinity,
-//         padding: const EdgeInsets.symmetric(horizontal: 20),
-//         child: Column(
-//           children: [
-//             AnimSearchBar(
-//               width: 400,
-//               textController: textController,
-//               onSuffixTap: () {
-//                 setState(() {
-//                   textController.clear();
-//                 });
-//               },
-//               color: Color.fromARGB(255, 255, 255, 255),
-//               // helpText: "Search",
-//               autoFocus: true,
-//               closeSearchOnSuffixTap: true,
-//               animationDurationInMilli: 1000,
-//               rtl: true,
-//             ),
-//             Expanded(
-//                 child: ListView.builder(
-//                     itemCount: candidate.length,
-//                     itemBuilder: (context, index) {
-//                       final candidate = candidates[index];
-
-//                       return ListTile(
-//                         leading: Image.network(
-//                           candidate.urlImage,
-//                           fit: BoxFit.cover,
-//                           width: 50,
-//                           height: 50,
-//                         ),
-//                         title: Text(candidate.name),
-//                       );
-//                     })),
-//           ],
-//         ),
-//       ),
-//     );
