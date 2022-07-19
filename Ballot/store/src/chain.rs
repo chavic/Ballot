@@ -5,11 +5,15 @@ use crate::metadata::*;
 
 pub struct Chain<H: Hashable, T: Hashable + Datable> {
     pub metadata: Metadata,
-    pub blocks: Vec<Block<H, T>>,
+    blocks: Vec<Block<H, T>>,
 }
 
 impl Chain<String, File> {
-    pub fn build_new(start: Block<String, File>, metadata: Metadata) -> Chain<String, File> {
+    pub fn new(metadata: Metadata) -> Chain<String, File> {
+        todo!("Impliment new chain")
+    }
+
+    pub fn build(start: Block<String, File>, metadata: Metadata) -> Chain<String, File> {
         todo!("Impliment block")
     }
 
@@ -35,5 +39,17 @@ impl Chain<String, File> {
         block: Option<Block<String, File>>,
     ) -> Result<Option<String>> {
         todo!("hash seg")
+    }
+
+    pub fn next_header(&self) -> Result<String> {
+        todo!("Impliment next hash")
+    }
+
+    pub fn prev_header(&self) -> Result<String> {
+        todo!("Impliment next hash")
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.blocks.is_empty()
     }
 }
