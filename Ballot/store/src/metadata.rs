@@ -19,7 +19,7 @@ pub enum SearchMetadata {
 impl Metadata {
     pub fn new(path: &Path) -> Result<Self> {
         let file_string = read_to_string(path)?;
-        let metadata: Metadata = serde_json::from_str(&file_string)?;
+        let metadata = serde_json::from_str(&file_string)?;
         Ok(metadata)
     }
 
