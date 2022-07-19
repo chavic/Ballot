@@ -3,12 +3,13 @@ use serde_json::Value;
 use std::fs::{read_to_string, File};
 use std::io::Result;
 use std::io::Write;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 type JSON = Value;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Metadata {
+    path: PathBuf,
     meta: JSON,
 }
 
