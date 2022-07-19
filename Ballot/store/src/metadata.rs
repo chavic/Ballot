@@ -3,7 +3,7 @@ use serde_json::Value;
 use std::fs::{read_to_string, File};
 use std::io::Result;
 use std::io::Write;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 
 type JSON = Value;
 
