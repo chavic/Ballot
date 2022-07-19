@@ -17,7 +17,6 @@ pub trait Datable {
 pub struct Block<H: Hashable, T: Hashable + Datable> {
     pub header: H,
     pub data: Option<T>,
-    pub link: Option<H>,
 }
 
 impl Hashable for File {
