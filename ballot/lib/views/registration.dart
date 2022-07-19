@@ -17,13 +17,14 @@ class _RegistrationState extends State<Registration> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const BackButton(color: Colors.black),
         centerTitle: true,
         title: Image.asset(
           "assets/ballot_t.png",
           fit: BoxFit.cover,
           height: 60,
         ),
-        backgroundColor: Color.fromARGB(255, 238, 108, 108),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
       ),
       body: Form(
         key: _formKey,
