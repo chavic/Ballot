@@ -9,14 +9,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Ballot',
-        home: AnimatedSplashScreen(
-            duration: 1000,
-            splash: Image.asset("assets/ballot.png"),
-            nextScreen: const HomeScreen(),
-            splashTransition: SplashTransition.decoratedBoxTransition,
-            pageTransitionType: PageTransitionType.rightToLeftWithFade,
-            backgroundColor: Colors.transparent));
+      debugShowCheckedModeBanner: false,
+      title: 'Ballot',
+      home: AnimatedSplashScreen(
+        splashTransition: SplashTransition.sizeTransition,
+        splash: Image.asset("assets/ballot.png"),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+
+        // duration: 1000,
+        nextScreen: const HomeScreen(),
+        pageTransitionType: PageTransitionType.fade,
+      ),
+    );
   }
 }
