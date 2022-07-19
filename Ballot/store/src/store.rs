@@ -1,10 +1,11 @@
 use std::fs::File;
+use std::io::Write;
 
 use crate::{
-    block::{Datable, Hashable},
+    block::{Block, Datable, Hashable},
     chain::Chain,
     config::StoreConfig,
-    metadata::SearchMetadata,
+    metadata::{self, Metadata, SearchMetadata},
     StoreError,
 };
 
@@ -19,22 +20,52 @@ pub struct LinkedStore {
 }
 
 impl ImutableStore {
-    pub fn new(config: &StoreConfig) -> Self {
-        todo!("Impliment new store")
+    pub fn new(config: StoreConfig) -> Result<Self, StoreError> {
+        let mut chain_metadata = config.path.clone();
+        chain_metadata.push("metadata.b");
+
+        let metadata = Metadata::new(&chain_metadata)?;
+        let chain = Chain::new(metadata);
+        Ok(ImutableStore { config, chain })
     }
 
-    pub fn put(data: &impl Datable) -> Result<(), StoreError> {
-        todo!("Impliment put store data")
+    pub fn put(&self, data: &mut (impl Datable + Hashable)) -> Result<(), StoreError> {
+        let prev_header = {
+            if self.chain.is_empty() {
+                String::from("0").sha256_hash().unwrap()
+            } else {
+                self.chain.prev_header().unwrap()
+            }
+        };
+
+        let next_header = { data.sha256_hash().unwrap() };
+
+        let mut block_path = self.config.data_path.clone();
+        block_path.push(format!("/{}.bd", next_header));
+
+        let mut file = File::create(block_path)?;
+        let data = data.data().unwrap();
+        write!(file, "{}", data)?;
+
+        let block: Block<String, File> = Block {
+            prev_header,
+            data: Some(file),
+        };
+
+        self.chain.add_block(block);
+
+        Ok(())
     }
 
     pub fn find(
-        data: &impl Datable,
+        &self,
+        data: &(impl Datable + Hashable),
         search_metadata: &SearchMetadata,
     ) -> Result<Option<()>, StoreError> {
         todo!("Impliment find data")
     }
 
-    pub fn count() -> Result<i32, StoreError> {
+    pub fn count(&self) -> Result<i32, StoreError> {
         todo!("Impliment count")
     }
 }
