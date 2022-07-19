@@ -43,6 +43,12 @@ impl Datable for File {
     }
 }
 
+impl Datable for String {
+    fn data(&mut self) -> Result<String> {
+        Ok(self.clone())
+    }
+}
+
 error_chain! {
     foreign_links {
         Io(std::io::Error);
