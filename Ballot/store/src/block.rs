@@ -15,7 +15,7 @@ pub trait Datable {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Block<H: Hashable, T: Hashable + Datable> {
-    pub header: H,
+    pub prev_header: H,
     pub data: Option<T>,
 }
 
@@ -73,7 +73,6 @@ fn sha256_digest<R: Read>(mut reader: R) -> Result<Digest> {
 
 #[cfg(test)]
 mod tests {
-    // Note this useful idiom: importing names from outer (for mod tests) scope.
     use super::*;
     use std::io::Write;
 
